@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- jQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <!--  Style  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="homework_week2_01_style.css"
+
+    <!--  Google Font  -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+
+    <title>소담 쇼핑몰</title>
+
+    <script>
+        function order() {
+            // 이름, 수량, 주소, 전화번호 중 빈 것 "XX 를 입력해주세요"
+            if (ord_name.value == "") {
+                alert('이름을 입력해주세요.');
+                return false;
+            } else if (ord_num.value == "0") {
+                alert('수량을 입력해주세요.');
+                return false;
+                // *질문* 여기서 수량 체크가 안먹혀요!
+            } else if (ord_ad.value == "") {
+                alert('주소를 입력해주세요.');
+                return false;
+            } else if (ord_hp.value == "") {
+                alert('전화번호를 입력해주세요.');
+                return false;
+            } else {
+            alert('주문이 완료되었습니다.')
+            }
+        }
+
+        $(document).ready(function(){
+            $.ajax ({
+                type: 'GET',
+                url: 'https://api.manana.kr/exchange/rate.json',
+                success: function(response) {
+                    // console.log(response)
+                    let data = response[1].rate
+                    let tempHtml = `<ul>달러-원 환율 : ${data}</ul>`
+                    $('#rate').append(tempHtml)
+                }
+            })
+            }
+            )
+    </script>
+
+</head>
+
+<body>
+
+    <div class="prd_image">
+        <img src="http://image.kyobobook.co.kr/newimages/giftshop_new/goods/400/1726/hot1499063666943.jpg">
+    </div>
+
+    <div class="prd_content">
+        <h2>디퓨저</h2>　가격 : 10,000,000원 / 개
+        <p>향기로운 디퓨저가 당신의 마음을 기분좋게 해드립니다!</p>
+    </div>
+
+    <div class="wrap">
+
+        <div class="ex" id="rate">
+
+
+        </div>
+
+        <h3>주문서 작성하기</h3>
+
+        <div class="order_content">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="ord_name1">주문자이름</span>
+              </div>
+              <input type="text" class="form-control" id="ord_name" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="ord_num">수량</label>
+              </div>
+              <select class="form-control" id="ord_num">
+                <option selected>수량을 선택하세요!</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="ord_ad1">주소</span>
+              </div>
+              <input type="text" class="form-control" id="ord_ad" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="ord_hp1">전화번호</span>
+              </div>
+              <input type="text" class="form-control" id="ord_hp" aria-describedby="basic-addon3">
+            </div>
+
+
+        </div>
+
+        <div class="order_btn">
+            <p>
+                <button type="button" class="btn btn-primary" onclick="order()">주문하기</button>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
