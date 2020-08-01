@@ -13,7 +13,6 @@
 
     <!--  Style  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css"
 
     <!--  Google Font  -->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
@@ -104,28 +103,30 @@
             });
 
             function order() {
+                let name = $('#ord_name').val();
+                let count = $('#ord_num').val();
+                let address = $('#ord_ad').val();
+                let phone = $('#ord_hp').val();
+
                 // 이름, 수량, 주소, 전화번호 중 빈 것 "XX 를 입력해주세요"
-                if (ord_name.value == "") {
+                if (name == "") {
                     alert('이름을 입력해주세요.');
-                    return false;
-                } else if (ord_num.value == "0") {
+                    $('#ord_name').focus();
+                    return;
+                } else if (count == "0") {
                     alert('수량을 입력해주세요.');
-                    return false;
-                    // *질문* 여기서 수량 체크가 안먹혀요!
-                } else if (ord_ad.value == "") {
+                    $('#ord_num').focus();
+                    return;
+                } else if (address == "") {
                     alert('주소를 입력해주세요.');
-                    return false;
-                } else if (ord_hp.value == "") {
+                    $('#ord_ad').focus();
+                    return;
+                } else if (phone == "") {
                     alert('전화번호를 입력해주세요.');
-                    return false;
-                } else {
-                alert('주문이 완료되었습니다.')
+                    $('#ord_hp').focus();
+                    return;
                 }
 
-                let name = $('#order-name').val();
-                let count = $('#order-count').val();
-                let address = $('#order-address').val();
-                let phone = $('#order-phone').val();
                 $.ajax({
                     type: "POST",
                     url: "/order",
@@ -145,6 +146,8 @@
                         }
                     }
                 })
+
+
             }
 
             function showOrders() {
